@@ -1,15 +1,14 @@
-package com.hamdibouallegue.stripe.controller;
+package com.albertosoto.stripe.controller;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.hamdibouallegue.stripe.settings.StripeSettings;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.albertosoto.stripe.model.CheckoutPayment;
+import com.albertosoto.stripe.settings.StripeSettings;
 import org.springframework.web.bind.annotation.*;
 
 import com.google.gson.Gson;
-import com.hamdibouallegue.stripe.model.Checkout;
-import com.hamdibouallegue.stripe.model.CheckoutPayment;
+import com.albertosoto.stripe.model.Checkout;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.checkout.Session;

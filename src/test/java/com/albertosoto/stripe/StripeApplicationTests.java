@@ -1,6 +1,6 @@
-package com.hamdibouallegue.stripe;
+package com.albertosoto.stripe;
 
-import com.hamdibouallegue.stripe.settings.StripeSettings;
+import com.albertosoto.stripe.settings.StripeSettings;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

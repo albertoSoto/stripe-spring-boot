@@ -1,4 +1,4 @@
-package com.hamdibouallegue.stripe.settings;
+package com.albertosoto.stripe.settings;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Configuration;

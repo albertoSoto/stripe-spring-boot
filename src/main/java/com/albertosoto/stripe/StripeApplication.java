@@ -1,6 +1,6 @@
-package com.hamdibouallegue.stripe;
+package com.albertosoto.stripe;
 
-import com.hamdibouallegue.stripe.settings.StripeSettings;
+import com.albertosoto.stripe.settings.StripeSettings;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;

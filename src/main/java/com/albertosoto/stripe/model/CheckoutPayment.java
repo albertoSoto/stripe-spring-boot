@@ -1,4 +1,4 @@
-package com.hamdibouallegue.stripe.model;
+package com.albertosoto.stripe.model;
 
 public class CheckoutPayment {
 	private String name;
