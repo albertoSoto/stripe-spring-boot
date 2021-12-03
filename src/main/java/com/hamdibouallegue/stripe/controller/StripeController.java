@@ -3,10 +3,9 @@ package com.hamdibouallegue.stripe.controller;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.hamdibouallegue.stripe.settings.StripeSettings;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 import com.google.gson.Gson;
 import com.hamdibouallegue.stripe.model.Checkout;
@@ -19,7 +18,22 @@ import com.stripe.param.checkout.SessionCreateParams;
 @RestController
 @RequestMapping(value = "/api")
 public class StripeController {
+
+	final
+	StripeSettings stripeSettings;
+
 	private static Gson gson = new Gson();
+
+	public StripeController(StripeSettings stripeSettings) {
+		this.stripeSettings = stripeSettings;
+	}
+
+	@GetMapping("/test")
+	public String test(){
+		Map<String, String> responseData = new HashMap<>();
+		responseData.put("id", stripeSettings.getUsername());
+		return gson.toJson(responseData);
+	}
 
 	@PostMapping("/payment")
 	/**
