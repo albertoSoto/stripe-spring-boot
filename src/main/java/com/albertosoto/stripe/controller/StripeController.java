@@ -44,7 +44,7 @@ public class StripeController {
 	 */
 	public String paymentWithCheckoutPage(@RequestBody CheckoutPayment payment) throws StripeException {
 		// We initilize stripe object with the api key
-		init();
+		Stripe.apiKey = stripeSettings.getApiKey();
 		// We create a stripe session
 		SessionCreateParams params = SessionCreateParams.builder()
 				// We will use the credit card payment method
@@ -100,7 +100,5 @@ public class StripeController {
 		}
 	}
 
-	private static void init() {
-		Stripe.apiKey = "Add_your_Secret_key";
-	}
+
 }
