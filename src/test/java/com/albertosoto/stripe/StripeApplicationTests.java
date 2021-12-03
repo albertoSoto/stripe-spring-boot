@@ -18,6 +18,8 @@ class StripeApplicationTests {
 	@Test
 	void contextLoads() {
 		Assert.isTrue(StringUtils.equals(stripeSettings.getUsername(),"foo"),"Settings not loaded");
+		Assert.isTrue(!StringUtils.equals(stripeSettings.getApiKey(),"<change-me>"),"API key not configured");
+
 	}
 
 }
