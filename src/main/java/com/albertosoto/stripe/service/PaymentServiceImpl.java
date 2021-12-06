@@ -54,8 +54,20 @@ public class PaymentServiceImpl implements PaymentService {
             List<com.albertosoto.stripe.model.Product> products =new ArrayList<>();
             for (com.stripe.model.Product p: productCollection.getData()
             ) {
+                Map<String, Object> pricPparams = new HashMap<>();
+                params.put("limit", 3);
+                params.put("product",p.getId());
+                PriceCollection prices = Price.list(pricPparams);
                 com.albertosoto.stripe.model.Product aux= new com.albertosoto.stripe.model.Product();
                 BeanUtils.copyProperties(p, aux);
+                List<com.albertosoto.stripe.model.Price> priceList =new ArrayList<>();
+                for (Price price:prices.getData()
+                     ) {
+                    com.albertosoto.stripe.model.Price ownPrice = new com.albertosoto.stripe.model.Price();
+                    BeanUtils.copyProperties(price,ownPrice);
+                    priceList.add(ownPrice);
+                }
+                aux.setPrices(priceList);
                 products.add(aux);
             }
             return products;

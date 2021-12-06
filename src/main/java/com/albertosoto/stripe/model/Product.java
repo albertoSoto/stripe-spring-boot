@@ -21,4 +21,5 @@ public class Product {
     @Getter
     @Setter
     List<Price> prices;
+
 }

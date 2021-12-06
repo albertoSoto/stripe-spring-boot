@@ -3,6 +3,8 @@ package com.albertosoto.stripe.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 public class Price {
     @Getter
     @Setter
@@ -21,5 +23,8 @@ public class Price {
     Boolean active;
     @Getter
     @Setter
-    Double value;
+    Long unitAmount;
+    @Getter
+    @Setter
+    String type;
 }
