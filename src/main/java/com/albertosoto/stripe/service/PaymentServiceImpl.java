@@ -2,15 +2,19 @@ package com.albertosoto.stripe.service;
 
 import com.albertosoto.stripe.settings.StripeSettings;
 import com.stripe.Stripe;
-import com.stripe.model.Price;
-import com.stripe.model.PriceCollection;
-import com.stripe.model.Subscription;
+import com.stripe.model.*;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.PriceListParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class PaymentServiceImpl implements PaymentService {
@@ -25,20 +29,40 @@ public class PaymentServiceImpl implements PaymentService {
     /**
      * defined in plan two > price > clave de busqueda
      * //https://stripe.com/docs/billing/prices-guide#lookup-keys
-     * 		//env var:https://docs.spring.io/spring-boot/docs/2.1.0.RELEASE/maven-plugin/examples/run-env-variables.html
+     * //env var:https://docs.spring.io/spring-boot/docs/2.1.0.RELEASE/maven-plugin/examples/run-env-variables.html
+     *
      * @param key
      * @return
      */
     @Override
     public PriceCollection getPricesByLookupKey(String key) {
         try {
-            Stripe.apiKey = stripeSettings.getApiKey();
             return Price.list(PriceListParams.builder().setActive(true).addLookupKeys(key).build());
         } catch (Exception e) {
             log.error("Searching prices", e);
             return null;
         }
 
+    }
+
+    @Override
+    public List<com.albertosoto.stripe.model.Product> getProducts() {
+        try {
+            Map<String, Object> params = new HashMap<>();
+            params.put("limit", 10);
+            ProductCollection productCollection= Product.list(params);
+            List<com.albertosoto.stripe.model.Product> products =new ArrayList<>();
+            for (com.stripe.model.Product p: productCollection.getData()
+            ) {
+                com.albertosoto.stripe.model.Product aux= new com.albertosoto.stripe.model.Product();
+                BeanUtils.copyProperties(p, aux);
+                products.add(aux);
+            }
+            return products;
+        } catch (Exception e) {
+            log.error("Searching prices", e);
+            return null;
+        }
     }
 
     /**
@@ -59,7 +83,7 @@ public class PaymentServiceImpl implements PaymentService {
     @Override
     public Session generateSession(Price price) {
         try {
-            if (price!=null){
+            if (price != null) {
                 String priceId = price.getId();
                 SessionCreateParams params = SessionCreateParams.builder()
                         .addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)

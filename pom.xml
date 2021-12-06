@@ -56,6 +56,19 @@
 			<artifactId>stripe-java</artifactId>
 			<version>20.69.0</version>
 		</dependency>
+		<!-- Lombok -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.4</version>
+			<scope>provided</scope>
+		</dependency>
+		<!--  Bean Utils-->
+<!--		<dependency>
+			<groupId>commons-beanutils</groupId>
+			<artifactId>commons-beanutils</artifactId>
+			<version>1.9.4</version>
+		</dependency>-->
 	</dependencies>
 
 	<build>

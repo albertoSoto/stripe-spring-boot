@@ -1,22 +1,27 @@
 package com.albertosoto.stripe;
 
+import com.albertosoto.stripe.model.Product;
 import com.albertosoto.stripe.service.PaymentService;
 import com.albertosoto.stripe.settings.StripeSettings;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Price;
 import com.stripe.model.PriceCollection;
+import com.stripe.model.ProductCollection;
 import com.stripe.model.checkout.Session;
 import com.stripe.param.PriceListParams;
 import com.stripe.param.checkout.SessionCreateParams;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.util.Assert;
 
 import java.net.URI;
+import java.util.ArrayList;
+import java.util.List;
 
 @SpringBootTest
 @EnableConfigurationProperties(StripeSettings.class)
@@ -38,7 +43,6 @@ class StripeApplicationTests {
 	@Test
 	void retrieveStripeSubscriptionProduct(){
 		try{
-			Stripe.apiKey = stripeSettings.getApiKey();
 			PriceCollection prices  = paymentService.getPricesByLookupKey("subscription");
 			Price price =prices.getData().get(0);
 			Session session = paymentService.generateSession(price);
@@ -47,5 +51,16 @@ class StripeApplicationTests {
 		}catch (Exception e){
 			System.out.println("mek");
 		}
+	}
+	@Test
+	void getAllProducts(){
+		try{
+			List<com.albertosoto.stripe.model.Product> products =paymentService.getProducts();
+			System.out.println("yuhu");
+		}catch (Exception e){
+			System.out.println("yuhu");
+		}
+
+		System.out.println("yuhu");
 	}
 }
